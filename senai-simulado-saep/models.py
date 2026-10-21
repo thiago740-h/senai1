@@ -9,7 +9,10 @@ from database import Base
 # Campos: id (PK), nome (String 100), login (String 50, unique), perfil (String 20)
 class Usuario(Base):
     __tablename__ = "usuarios"
-
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(100), nullable=False)
+    login = Column(String(50), unique=True)
+    perfil = Column(String(20))
     # TODO: adicione os campos aqui
     pass
 
@@ -19,9 +22,12 @@ class Usuario(Base):
 #         quantidade_estoque (Float, default=0.0)
 class Produto(Base):
     __tablename__ = "produtos"
-
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(100))
+    unidade = Column(String(20))
+    quantidade_estoque = Column(Float, default=0.0) 
     # TODO: adicione os campos aqui
-    pass
+    # pass
 
 
 # Tabela: movimentacoes
@@ -29,6 +35,11 @@ class Produto(Base):
 #         observacao (String 300, nullable), produto_id (FK), usuario_id (FK)
 class Movimentacao(Base):
     __tablename__ = "movimentacoes"
-
+    id = Column(Integer, primary_key=True, index=True)
+    tipo = Column(String(10))
+    quantidade = Column(Float)
+    observacao = Column(String(300), nullable=True)
+    produto_id = Column(Integer, ForeignKey("produtos.id"))
+    usuario = Column(Integer, ForeignKey("usuarios.id"))
     # TODO: adicione os campos aqui
-    pass
+    # pass
